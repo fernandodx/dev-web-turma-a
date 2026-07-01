@@ -1,5 +1,6 @@
 <template>
   <div>
+<<<<<<< HEAD
     <div v-if="msg" :class="['alerta-container', classeAlerta]">
       <span>{{ msg }}</span>
     </div>
@@ -10,6 +11,18 @@
     <p id="nome-base-content">{{ baseAcai.nome }}</p>
   </div>
 </div>
+=======
+    <form id="pedido-form" @submit="criarPedido($event)">
+      <div>
+        <p id="nome-hamburguer-content">
+          {{ burguer && burguer.nome ? burguer.nome : "-" }}
+        </p>
+        <img
+          id="foto-content"
+          :src="burguer && burguer.foto ? burguer.foto : ''"
+        />
+      </div>
+>>>>>>> 77b102aa185a10e650b8bd32a6b6d5855491b155
       <div class="inputs">
         <label for="nome-cliente">Nome</label>
         <input
@@ -21,6 +34,7 @@
         />
       </div>
       <div class="inputs">
+<<<<<<< HEAD
         <label>Tamanho do Copo / Tigela</label>
         <select
           name="tamanho-copo"
@@ -34,12 +48,32 @@
             :value="tamanho"
           >
             {{ tamanho.descricao }}
+=======
+        <label>Ponto da carne</label>
+        <select 
+         name="ponto-carne" 
+         id="ponto-carne" 
+         v-model="pontoCarneSelecionado"
+        >
+          <option value="" selected>Selecione o ponto</option>
+          <option
+            v-for="pontoCarne in listaPontoCarne"
+            :key="pontoCarne.id"
+            :value="pontoCarne"
+          >
+            {{ pontoCarne.descricao }}
+>>>>>>> 77b102aa185a10e650b8bd32a6b6d5855491b155
           </option>
         </select>
       </div>
       <div class="inputs">
+<<<<<<< HEAD
         <label id="opcionais-titulo"> Selecione os adicionais</label>
         <label id="opcionais-subtitulo"> Selecione os complementos e toppings</label>
+=======
+        <label id="opcionais-titulo"> Selecione os opcionais</label>
+        <label id="opcionais-subtitulo"> Selecione os complementos</label>
+>>>>>>> 77b102aa185a10e650b8bd32a6b6d5855491b155
 
         <div
           class="checkbox-container"
@@ -63,12 +97,21 @@
           v-for="bebida in listaBebidas"
           :key="bebida.id"
         >
+<<<<<<< HEAD
           <input
             type="checkbox"
             :name="bebida.nome"
             :value="bebida"
             v-model="listaBebidasSelecionadas"
           />
+=======
+          <input 
+          type="checkbox" 
+          :name="bebida.nome" 
+          :value="bebida" 
+          v-model="listaBebidasSelecionadas" 
+        />
+>>>>>>> 77b102aa185a10e650b8bd32a6b6d5855491b155
           <span>{{ bebida.nome }}</span>
         </div>
         <div class="inputs">
@@ -78,11 +121,15 @@
     </form>
   </div>
 </template>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 77b102aa185a10e650b8bd32a6b6d5855491b155
 <script>
 export default {
   name: "PedidoComponent",
   props: {
+<<<<<<< HEAD
     // Atualizado de burguer para baseAcai
     baseAcai: null,
   },
@@ -105,6 +152,26 @@ export default {
       const response = await fetch(`${this.$apiUrl}/tipos_pontos`);
       const dados = await response.json();
       this.listaTamanhos = dados;
+=======
+    burguer: null,
+  },
+  data() {
+    return {
+      listaPontoCarne: [],
+      listaBebidas: [],
+      listaComplementos: [],
+      nomeCliente: "",
+      pontoCarneSelecionado: "",
+      listaComplementosSelecionados: [],
+      listaBebidasSelecionadas: [],
+    };
+  },
+  methods: {
+    async getTipoPontos() {
+      const response = await fetch(`${this.$apiUrl}/tipos_pontos`);
+      const dados = await response.json();
+      this.listaPontoCarne = dados;
+>>>>>>> 77b102aa185a10e650b8bd32a6b6d5855491b155
     },
     async getOpcionais() {
       const response = await fetch(`${this.$apiUrl}/opcionais`);
@@ -112,6 +179,7 @@ export default {
       this.listaComplementos = dados.complemento;
       this.listaBebidas = dados.bebidas;
     },
+<<<<<<< HEAD
     async criarPedido(e) {
       e.preventDefault();
 
@@ -161,10 +229,38 @@ export default {
   },
   mounted() {
     this.getListaTamanhos();
+=======
+    async criarPedido(e){
+        e.preventDefault();
+      
+      const dadosPedido = {
+        nome: this.nomeCliente,
+        ponto: this.pontoCarneSelecionado,
+        bebidas: Array.from(this.listaBebidasSelecionadas),
+        complemento: Array.from(this.listaComplementosSelecionados),
+        burguer: this.burguer,
+        statusId: 5,
+      };
+
+      console.log(dadosPedido);
+
+      const dadosJson = JSON.stringify(dadosPedido);
+
+      const req = await fetch(`${this.$apiUrl}/pedidos`, {
+        method: "POST",
+        headers: {"Content-Type" : "application/json"},
+        body: dadosJson,
+      });
+    },
+  },
+  mounted() {
+    this.getTipoPontos();
+>>>>>>> 77b102aa185a10e650b8bd32a6b6d5855491b155
     this.getOpcionais();
   },
 };
 </script>
+<<<<<<< HEAD
 
 <style scoped>
 .alerta-container {
@@ -219,6 +315,21 @@ export default {
 }
 
 #nome-base-content {
+=======
+<style scoped>
+#foto-content {
+  margin-bottom: 16px;
+  border-radius: 16px;
+  position: relative;
+  z-index: -1;
+  justify-content: center;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+#nome-hamburguer-content {
+>>>>>>> 77b102aa185a10e650b8bd32a6b6d5855491b155
   font-size: 43px;
   font-weight: bold;
   text-align: start;
@@ -305,6 +416,7 @@ select {
   background-color: darkgoldenrod;
   color: #222;
 }
+<<<<<<< HEAD
 #pedido-form {
   max-width: 700px;
   margin: 40px auto;
@@ -468,4 +580,6 @@ select:focus {
   color: #1e4620;
   border: 1px solid #cce8cd;
 }
+=======
+>>>>>>> 77b102aa185a10e650b8bd32a6b6d5855491b155
 </style>

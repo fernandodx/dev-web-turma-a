@@ -1,17 +1,26 @@
 <template>
   <div>
+<<<<<<< HEAD
     <div v-if="msgExclusao" class="alerta-container alerta-laranja">
       <span>{{ msgExclusao }}</span>
     </div>
 
+=======
+>>>>>>> 77b102aa185a10e650b8bd32a6b6d5855491b155
     <div id="pedidos-tabela">
       <div>
         <div id="pedidos-tabela-cabecalho">
           <div id="ordem-id">#ID</div>
           <div>Nome</div>
+<<<<<<< HEAD
           <div>Base de Açaí</div>
           <div>Tamanho</div>
           <div>Adicionais</div>
+=======
+          <div>Hamburguer</div>
+          <div>Ponto</div>
+          <div>Opcionais</div>
+>>>>>>> 77b102aa185a10e650b8bd32a6b6d5855491b155
           <div>Status</div>
           <div id="div-acoes">Ações</div>
         </div>
@@ -24,8 +33,13 @@
     >
       <div id="ordem-numero">{{ pedido.id }}</div>
       <div>{{ pedido.nome }}</div>
+<<<<<<< HEAD
       <div>{{ pedido.baseAcai && pedido.baseAcai.nome ? pedido.baseAcai.nome : "-" }}</div>
       <div>{{ pedido.tamanho && pedido.tamanho.descricao ? pedido.tamanho.descricao : "-" }}</div>
+=======
+      <div>{{ pedido.burguer.nome }}</div>
+      <div>{{ pedido.ponto.descricao }}</div>
+>>>>>>> 77b102aa185a10e650b8bd32a6b6d5855491b155
       <div>
         <ul>
           <li v-for="(complemento, index) in pedido.complemento" :key="index">
@@ -34,17 +48,25 @@
         </ul>
         <div class="divider"></div>
         <ul>
+<<<<<<< HEAD
           <li v-for="(bebida, index) in pedido.bebidas" :key="index">
+=======
+          <li v-for="(bebida, index) in pedido.bebida" :key="index">
+>>>>>>> 77b102aa185a10e650b8bd32a6b6d5855491b155
             {{ bebida.nome }}
           </li>
         </ul>
       </div>
       <div>
+<<<<<<< HEAD
         <select
           name="status"
           class="status"
           @change="atualizarStatusPedido($event, pedido.id)"
         >
+=======
+        <select name="status" class="status" @change="atualizarStatusPedido($event, pedido.id)">
+>>>>>>> 77b102aa185a10e650b8bd32a6b6d5855491b155
           <option value="">Selecione</option>
           <option
             v-for="status in listaStatusPedido"
@@ -58,17 +80,27 @@
       </div>
       <div id="div-acoes">
         <img
+<<<<<<< HEAD
           @click="deletarPedido(pedido.id)"
           src="/img/icone_lixeira.png"
           width="35px"
           height="35px"
           style="cursor: pointer;"
         />
+=======
+        @click="deletarPedido(pedido.id)"
+         src="/img/icone_lixeira.png" 
+         width="35px" 
+         height="35px" />
+>>>>>>> 77b102aa185a10e650b8bd32a6b6d5855491b155
       </div>
     </div>
   </div>
 </template>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 77b102aa185a10e650b8bd32a6b6d5855491b155
 <script>
 export default {
   name: "ListaPedidoComponent",
@@ -76,7 +108,10 @@ export default {
     return {
       listaPedidosRealizados: [],
       listaStatusPedido: [],
+<<<<<<< HEAD
       msgExclusao: null,
+=======
+>>>>>>> 77b102aa185a10e650b8bd32a6b6d5855491b155
     };
   },
   methods: {
@@ -91,6 +126,7 @@ export default {
       this.listaStatusPedido = await response.json();
     },
     async deletarPedido(id) {
+<<<<<<< HEAD
       const response = await fetch(`${this.$apiUrl}/pedidos/${id}`, {
         method: "DELETE",
       });
@@ -113,6 +149,22 @@ export default {
         headers: { "Content-Type": "application/json" },
         body: atualizaoJson,
       });
+=======
+        const response = await fetch(`${this.$apiUrl}/pedidos/${id}`, {
+            method: "DELETE",
+        });
+    },
+    async atualizarStatusPedido(event, idPedido){
+        const idPedidoAtualizado = event.target.value;
+
+        const atualizaoJson = JSON.stringify({statusId : idPedidoAtualizado});
+
+        await fetch(`${this.$apiUrl}/pedidos/${idPedido}`, {
+            method: "PATCH",
+            headers: {"content-Type" : "application/json"},
+            body: atualizaoJson,
+        });
+>>>>>>> 77b102aa185a10e650b8bd32a6b6d5855491b155
     },
   },
   mounted() {
@@ -121,6 +173,7 @@ export default {
   },
 };
 </script>
+<<<<<<< HEAD
 
 <style scoped>
 .alerta-container {
@@ -138,6 +191,9 @@ export default {
   border: 1px solid #ffeeba;
 }
 
+=======
+<style scoped>
+>>>>>>> 77b102aa185a10e650b8bd32a6b6d5855491b155
 #pedidos-tabela {
   width: 100%;
   margin: 0 auto;
